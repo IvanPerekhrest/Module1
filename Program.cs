@@ -1,4 +1,4 @@
-﻿namespace DeliveryApp
+namespace DeliveryApp
 {
     public enum PaymentType
     {
@@ -27,7 +27,18 @@
         }
     }
 
-    public abstract class Transport
+
+    public interface ITransport
+    {
+        string Name { get; set; }
+        bool IsBusy { get; set; }
+        Order CurrentOrder { get; set; }
+
+        double CalculateCost(Order order);
+        bool CanTake(Order order);
+    }
+
+    public abstract class Transport : ITransport
     {
         public string Name { get; set; }
         public bool IsBusy { get; set; }
